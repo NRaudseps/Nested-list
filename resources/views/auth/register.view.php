@@ -14,7 +14,7 @@
         <div class="h-2/5 w-1/5 border border-gray-300 rounded-lg shadow shadow-lg bg-white">
             <h3 class="text-3xl flex justify-center py-4">Register</h3>
 
-            <form action="#" method="post" class="px-4">
+            <form action="/register" method="post" class="px-4">
                 <label for="username">Enter Your Username</label>
                 <input
                     type="text"

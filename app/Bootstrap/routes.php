@@ -6,4 +6,5 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', $namespace . 'Controller@index');
     $r->addRoute('GET', '/login', $namespace . 'Controller@login');
     $r->addRoute('GET', '/register', $namespace . 'Controller@register');
+    $r->addRoute('POST', '/register', $namespace . 'RegisterController@store');
 });
