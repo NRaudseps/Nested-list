@@ -1,0 +1,20 @@
+{
+  "name": "SIA_SOK",
+  "version": "1.0.0",
+  "description": "1. Authorization  2. A section (each section has a name, and a description) within a section within a section (3 layers in total) 4. All section can be modified or deleted",
+  "main": "index.js",
+  "scripts": {
+    "dev": "postcss src/css/app.css -o public/app.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.0.2",
+    "postcss": "^8.1.10",
+    "tailwindcss": "^2.0.1"
+  },
+  "devDependencies": {
+    "postcss-cli": "^8.3.0"
+  }
+}
