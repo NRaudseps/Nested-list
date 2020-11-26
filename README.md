@@ -17,4 +17,8 @@
   3. symfony/console
   4. Carbon
   5. Faker
+  6. symfony/routing
+  7. doctrine/migrations
+  8. Dotenv
+  9. 
   
