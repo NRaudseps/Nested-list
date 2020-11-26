@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="font-mono h-screen flex justify-center items-center bg-gray-200">
+    <div class="font-mono h-screen flex justify-center items-center flex-col bg-gray-200">
         <div class="h-2/5 w-1/5 border border-gray-300 rounded-lg shadow shadow-lg bg-white">
             <h3 class="text-3xl flex justify-center py-4">Register</h3>
 
@@ -58,6 +58,11 @@
                 </div>
             </form>
         </div>
+        <?php if (isset($_GET['error'])): ?>
+            <p class="mt-2 text-red-400">
+                <?php echo $_GET['error']; ?>
+            </p>
+        <?php endif; ?>
     </div>
 </body>
 </html>

@@ -4,7 +4,6 @@
 namespace Feature;
 
 use App\Bootstrap\Database;
-use Faker\Factory;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
@@ -28,7 +27,8 @@ class RegisterTest extends TestCase
         $info = [
             'username' => 'jon',
             'email' => 'jon@example.com',
-            'password' => 'password'
+            'password' => 'password',
+            'password_confirmation' => 'password'
         ];
 
         $response = $client->request('POST', '/register', [
@@ -45,10 +45,10 @@ class RegisterTest extends TestCase
             ->execute()
             ->fetch();
 
+        $this->deleteTestInputFromDatabase('jon');
+
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals($db['username'], 'jon');
-
-        $this->deleteTestInputFromDatabase('jon');
     }
 
     /** @test */
@@ -59,7 +59,8 @@ class RegisterTest extends TestCase
         $info = [
             'username' => 'jon',
             'email' => 'jon@example.com',
-            'password' => 'password'
+            'password' => 'password',
+            'password_confirmation' => 'password'
         ];
 
         $response = $client->request('POST', '/register', [
@@ -76,14 +77,45 @@ class RegisterTest extends TestCase
             ->execute()
             ->fetch();
 
+        $this->deleteTestInputFromDatabase('jon');
+
         $this->assertTrue(password_verify('password', $db['password']));
+    }
+
+    /** @test */
+    public function the_password_has_to_be_confirmed()
+    {
+        $client = new Client(['base_uri' => 'http://localhost:8000']);
+
+        $info = [
+            'username' => 'jon',
+            'email' => 'jon@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'incorrect'
+        ];
+
+        $response = $client->request('POST', '/register', [
+            'form_params' => $info,
+            'allow_redirects' => false
+        ]);
+
+        $db = (new Database())
+            ->query('../../')
+            ->select('*')
+            ->from('users')
+            ->where('username = :username')
+            ->setParameter('username', 'jon')
+            ->execute()
+            ->fetch();
 
         $this->deleteTestInputFromDatabase('jon');
+
+        $this->assertFalse($db);
     }
 
     protected function deleteTestInputFromDatabase(string $username): void
     {
-        $db = (new Database())
+        (new Database())
             ->query('../../')
             ->delete('users')
             ->where('username = :username')

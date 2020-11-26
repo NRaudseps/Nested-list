@@ -12,7 +12,7 @@ class RegisterController
     {
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        if(isset($_POST)) {
+        if(isset($_POST) && $_POST['password'] === $_POST['password_confirmation']) {
             (new Database())
                 ->query()
                 ->insert('users')
@@ -25,8 +25,10 @@ class RegisterController
                 ->setParameter(1, $_POST['email'])
                 ->setParameter(2, $password)
                 ->execute();
-        }
 
         header("Location: /");
+        } else {
+            header("Location: /register?error=Passwords+do+not+match");
+        }
     }
 }
