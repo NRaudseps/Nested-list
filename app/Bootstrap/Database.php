@@ -6,16 +6,20 @@ namespace App\Bootstrap;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Query\QueryBuilder;
+use Dotenv\Dotenv;
 
 class Database
 {
     public function database(): Connection
     {
+        $dotenv = Dotenv::createImmutable(realpath(''));
+        $dotenv->load();
+
         $connectionParams = array(
-            'dbname' => 'nested_list',
-            'user' => 'root',
-            'password' => 'Myroo1!!',
-            'host' => 'localhost',
+            'dbname' => $_ENV['DB_DATABASE'],
+            'user' => $_ENV['DB_USER'],
+            'password' => $_ENV['DB_PASSWORD'],
+            'host' => $_ENV['DB_HOST'],
             'driver' => 'pdo_mysql',
         );
 
