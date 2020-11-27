@@ -13,4 +13,8 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/register', $namespace . 'RegisterController@store');
 
     $r->addRoute('GET', '/dashboard', $namespace . 'DashboardController@index');
+
+    $r->addRoute('GET', '/section/create', $namespace . 'SectionController@create');
+    $r->addRoute('POST', '/section/create', $namespace . 'SectionController@store');
+    $r->addRoute('GET', '/section/{id}', $namespace . 'SectionController@index');
 });

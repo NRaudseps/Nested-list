@@ -4,8 +4,6 @@
 namespace App\Controllers;
 
 
-use App\Bootstrap\Database;
-
 class HomeController
 {
     public function index()
