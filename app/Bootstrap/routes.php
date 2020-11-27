@@ -16,5 +16,6 @@ return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->addRoute('GET', '/section/create', $namespace . 'SectionController@create');
     $r->addRoute('POST', '/section/create', $namespace . 'SectionController@store');
+    $r->addRoute('POST', '/section/delete', $namespace . 'SectionController@destroy');
     $r->addRoute('GET', '/section/{id}', $namespace . 'SectionController@index');
 });

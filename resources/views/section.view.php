@@ -1,5 +1,6 @@
 <?php
 require_once 'layouts/header.view.php';
+session_start();
 ?>
 
 <div class="p-8">

@@ -62,4 +62,25 @@ class SectionController
 
         header("Location: {$url}");
     }
+
+    public function destroy()
+    {
+        session_start();
+
+        $url = '/section/' . $_POST['redirect_id'];
+        if($_POST['redirect_id'] === ''){
+            $_POST['redirect_id'] = null;
+            $url = '/dashboard';
+        }
+//        die(var_dump($url));
+
+        (new Database())
+            ->query()
+            ->delete('sections')
+            ->where('id = :id')
+            ->setParameter('id', $_POST['id'])
+            ->execute();
+
+        header("Location: {$url}");
+    }
 }
