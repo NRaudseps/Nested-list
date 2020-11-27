@@ -3,8 +3,11 @@
 return FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $namespace = '\App\Controllers\\';
 
-    $r->addRoute('GET', '/', $namespace . 'Controller@index');
-    $r->addRoute('GET', '/login', $namespace . 'Controller@login');
-    $r->addRoute('GET', '/register', $namespace . 'Controller@register');
+    $r->addRoute('GET', '/', $namespace . 'HomeController@index');
+
+    $r->addRoute('GET', '/login', $namespace . 'LoginController@show');
+    $r->addRoute('POST', '/login', $namespace . 'LoginController@check');
+
+    $r->addRoute('GET', '/register', $namespace . 'RegisterController@show');
     $r->addRoute('POST', '/register', $namespace . 'RegisterController@store');
 });

@@ -5,28 +5,29 @@ namespace App\Controllers;
 
 
 use App\Bootstrap\Database;
+use App\Services\SaveUserService;
+use App\Services\ValidateUserService;
+use App\Models\User;
 
 class RegisterController
 {
+    public function show()
+    {
+        return require_once './resources/views/auth/register.view.php';
+    }
+
     public function store()
     {
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        if((new ValidateUserService())->execute($_POST)) {
+            $user = new User(
+                $_POST['username'],
+                $_POST['email'],
+                password_hash($_POST['password'], PASSWORD_BCRYPT)
+            );
 
-        if(isset($_POST) && $_POST['password'] === $_POST['password_confirmation']) {
-            (new Database())
-                ->query()
-                ->insert('users')
-                ->values([
-                    'username' => '?',
-                    'email' => '?',
-                    'password' => '?',
-                ])
-                ->setParameter(0, $_POST['username'])
-                ->setParameter(1, $_POST['email'])
-                ->setParameter(2, $password)
-                ->execute();
+            (new SaveUserService)->execute($user);
 
-        header("Location: /");
+            header("Location: /");
         } else {
             header("Location: /register?error=Passwords+do+not+match");
         }

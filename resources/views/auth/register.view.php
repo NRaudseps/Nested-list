@@ -60,7 +60,7 @@
         </div>
         <?php if (isset($_GET['error'])): ?>
             <p class="mt-2 text-red-400">
-                <?php echo $_GET['error']; ?>
+                <?php echo htmlspecialchars($_GET['error']); ?>
             </p>
         <?php endif; ?>
     </div>

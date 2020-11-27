@@ -113,6 +113,39 @@ class RegisterTest extends TestCase
         $this->assertFalse($db);
     }
 
+    /** @test */
+    public function a_user_cannot_register_twice()
+    {
+        $client = new Client(['base_uri' => 'http://localhost:8000']);
+
+        $info = [
+            'username' => 'jon',
+            'email' => 'jon@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+
+        for($i = 0; $i < 2; $i++){
+            $response = $client->request('POST', '/register', [
+                'form_params' => $info,
+                'allow_redirects' => false
+            ]);
+        }
+
+        $db = (new Database())
+            ->query('../../')
+            ->select('*')
+            ->from('users')
+            ->where('username = :username')
+            ->setParameter('username', 'jon')
+            ->execute()
+            ->fetchAll();
+
+        $this->deleteTestInputFromDatabase('jon');
+
+        $this->assertEquals(1, (int) count($db));
+    }
+
     protected function deleteTestInputFromDatabase(string $username): void
     {
         (new Database())
