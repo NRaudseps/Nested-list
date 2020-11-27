@@ -37,7 +37,7 @@ class RegisterTest extends TestCase
         ]);
 
         $db = (new Database())
-            ->query('../../')
+            ->query()
             ->select('*')
             ->from('users')
             ->where('username = :username')
@@ -69,7 +69,7 @@ class RegisterTest extends TestCase
         ]);
 
         $db = (new Database())
-            ->query('../../')
+            ->query()
             ->select('*')
             ->from('users')
             ->where('username = :username')
@@ -100,7 +100,7 @@ class RegisterTest extends TestCase
         ]);
 
         $db = (new Database())
-            ->query('../../')
+            ->query()
             ->select('*')
             ->from('users')
             ->where('username = :username')
@@ -133,7 +133,7 @@ class RegisterTest extends TestCase
         }
 
         $db = (new Database())
-            ->query('../../')
+            ->query()
             ->select('*')
             ->from('users')
             ->where('username = :username')
@@ -149,7 +149,7 @@ class RegisterTest extends TestCase
     protected function deleteTestInputFromDatabase(string $username): void
     {
         (new Database())
-            ->query('../../')
+            ->query()
             ->delete('users')
             ->where('username = :username')
             ->setParameter('username', $username)

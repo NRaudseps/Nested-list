@@ -4,6 +4,8 @@
 namespace App\Controllers;
 
 
+use App\Services\ValidateUserLoginService;
+
 class LoginController
 {
     public function show()
@@ -13,6 +15,8 @@ class LoginController
 
     public function check()
     {
-        
+        if((new ValidateUserLoginService())->execute($_POST)){
+            header("Location: /");
+        }
     }
 }

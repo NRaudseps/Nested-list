@@ -25,7 +25,7 @@ class UserRepository
             ->execute();
     }
 
-    public function get($username)
+    public function getByUsername($username)
     {
         return (new Database())
             ->query()
@@ -33,6 +33,18 @@ class UserRepository
             ->from('users')
             ->where('username = :username')
             ->setParameter('username', $username)
+            ->execute()
+            ->fetchAll();
+    }
+
+    public function getByEmail($email)
+    {
+        return (new Database())
+            ->query()
+            ->select('*')
+            ->from('users')
+            ->where('email = :email')
+            ->setParameter('email', $email)
             ->execute()
             ->fetchAll();
     }

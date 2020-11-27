@@ -10,9 +10,9 @@ use Dotenv\Dotenv;
 
 class Database
 {
-    public function database($path = null): Connection
+    public function database(): Connection
     {
-        $path = realpath($path) ?? realpath('');
+        $path = realpath(__DIR__ . '/../../');
         $dotenv = Dotenv::createImmutable($path);
         $dotenv->load();
 
@@ -30,8 +30,8 @@ class Database
         return $connection;
     }
 
-    public function query($path = null): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $this->database($path)->createQueryBuilder();
+        return $this->database()->createQueryBuilder();
     }
 }

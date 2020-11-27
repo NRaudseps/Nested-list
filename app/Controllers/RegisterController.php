@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use App\Bootstrap\Database;
 use App\Services\SaveUserService;
-use App\Services\ValidateUserService;
+use App\Services\ValidateUserRegistrationService;
 use App\Models\User;
 
 class RegisterController
@@ -18,7 +18,7 @@ class RegisterController
 
     public function store()
     {
-        if((new ValidateUserService())->execute($_POST)) {
+        if((new ValidateUserRegistrationService())->execute($_POST)) {
             $user = new User(
                 $_POST['username'],
                 $_POST['email'],

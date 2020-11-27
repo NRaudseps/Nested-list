@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 
-class ValidateUserService
+class ValidateUserRegistrationService
 {
     protected UserRepository $user;
 
@@ -17,11 +17,9 @@ class ValidateUserService
 
     public function execute($post)
     {
-        $query = $this->user->get($post['username']);
+        $query = $this->user->getByUsername($post['username']);
 
-        if((!isset($post['password_confirmation'])
-            || $post['password'] === $post['password_confirmation'])
-            && count($query) === 0){
+        if($post['password'] === $post['password_confirmation'] && count($query) === 0){
             return true;
         }
         return false;
