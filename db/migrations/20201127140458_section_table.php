@@ -20,8 +20,11 @@ final class SectionTable extends AbstractMigration
     {
         $table = $this->table('sections');
         $table->addIndex(['id'])
+            ->addColumn('user_id', 'integer', [])
             ->addColumn('parent_id', 'integer', ['null' => true])
-            ->addColumn('name', 'string')
+            ->addColumn('name', 'string', ['limit' => 20])
+            ->addColumn('description', 'string', ['limit' => 140])
+            ->addForeignKey('user_id', 'users', 'id')
             ->create();
     }
 }

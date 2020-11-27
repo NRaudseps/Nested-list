@@ -9,7 +9,7 @@ use App\Models\User;
 
 class UserRepository
 {
-    public function save(User $user)
+    public function save($post)
     {
         (new Database())
             ->query()
@@ -19,22 +19,25 @@ class UserRepository
                 'email' => '?',
                 'password' => '?',
             ])
-            ->setParameter(0, $user->username())
-            ->setParameter(1, $user->email())
-            ->setParameter(2, $user->password())
+            ->setParameter(0, $post['username'])
+            ->setParameter(1, $post['email'])
+            ->setParameter(2, password_hash($post['password'], PASSWORD_BCRYPT))
             ->execute();
     }
 
     public function getByUsername($username)
     {
-        return (new Database())
+        $query = (new Database())
             ->query()
             ->select('*')
             ->from('users')
             ->where('username = :username')
             ->setParameter('username', $username)
             ->execute()
-            ->fetchAll();
+            ->fetch();
+
+        return empty($query) ? [] :
+            new User($query['id'], $query['username'], $query['email'], $query['password']);
     }
 
     public function getByEmail($email)
@@ -48,6 +51,6 @@ class UserRepository
             ->execute()
             ->fetchAllAssociative()[0];
 
-        return new User($query['username'], $query['email'], $query['password']);
+        return new User($query['id'], $query['username'], $query['email'], $query['password']);
     }
 }

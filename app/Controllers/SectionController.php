@@ -36,22 +36,27 @@ class SectionController
 
     public function store()
     {
+        session_start();
+
         $url = '/section/' . $_POST['id'];
         if($_POST['id'] === ''){
             $_POST['id'] = null;
             $url = '/dashboard';
         }
 
-
         (new Database())
             ->query()
             ->insert('sections')
             ->values([
+                'user_id' => '?',
                 'parent_id' => '?',
-                'name' => '?'
+                'name' => '?',
+                'description' => '?'
             ])
-            ->setParameter(0, $_POST['id'])
-            ->setParameter(1, $_POST['name'])
+            ->setParameter(0, $_SESSION['id'])
+            ->setParameter(1, $_POST['id'])
+            ->setParameter(2, $_POST['name'])
+            ->setParameter(3, $_POST['description'])
             ->execute();
 
 

@@ -21,6 +21,7 @@ class LoginController
             session_start();
             $user = (new GetUserService())->getByEmail($_POST['email']);
             $_SESSION['username'] = $user->username();
+            $_SESSION['id'] = $user->id();
 
             header("Location: /dashboard");
         } else {

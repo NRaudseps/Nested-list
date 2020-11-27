@@ -19,7 +19,7 @@ class ValidateUserRegistrationService
     {
         $query = $this->user->getByUsername($post['username']);
 
-        if($post['password'] === $post['password_confirmation'] && count($query) === 0){
+        if($post['password'] === $post['password_confirmation'] && empty($query)){
             return true;
         }
         return false;

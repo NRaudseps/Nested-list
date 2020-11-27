@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Bootstrap\Database;
+use App\Services\GetUserService;
 use App\Services\SaveUserService;
 use App\Services\ValidateUserRegistrationService;
 use App\Models\User;
@@ -19,17 +20,12 @@ class RegisterController
     public function store()
     {
         if((new ValidateUserRegistrationService())->execute($_POST)) {
-            $user = new User(
-                $_POST['username'],
-                $_POST['email'],
-                password_hash($_POST['password'], PASSWORD_BCRYPT)
-            );
-
-            (new SaveUserService)->execute($user);
-
+            (new SaveUserService())->execute($_POST);
+            $id = (new GetUserService())->getByEmail($_POST['email'])->id();
             session_start();
 
-            $_SESSION['username'] = $user->username();
+            $_SESSION['username'] = $_POST['username'];
+            $_SESSION['id'] = $id;
 
             header("Location: /dashboard");
         } else {

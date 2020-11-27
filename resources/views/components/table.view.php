@@ -3,6 +3,7 @@
     <tr>
         <th class="border-2 border-gray-300 px-4 bg-gray-100">id</th>
         <th class="border-2 border-gray-300 px-4 bg-gray-100">name</th>
+        <th class="border-2 border-gray-300 px-4 bg-gray-100">description</th>
     </tr>
     </thead>
     <tbody>
@@ -13,6 +14,8 @@
             </td>
             <td class="border-2 border-gray-300 px-3">
                 <a href="/section/<?php echo $section['id']?>"><?php echo $section['name']; ?></a>
+            </td><td class="border-2 border-gray-300 px-3">
+                <a href="/section/<?php echo $section['id']?>"><?php echo $section['description']; ?></a>
             </td>
         </tr>
     <?php endforeach; ?>

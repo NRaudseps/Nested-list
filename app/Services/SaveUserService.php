@@ -17,8 +17,8 @@ class SaveUserService
         $this->user = new UserRepository();
     }
 
-    public function execute(User $user)
+    public function execute($post)
     {
-        $this->user->save($user);
+        $this->user->save($post);
     }
 }

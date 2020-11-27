@@ -22,8 +22,9 @@ class GetUserService
         return $this->user->getByEmail($email);
     }
 
-    public function getByUsername()
+    public function getByUsername($username)
     {
 
+        return $this->user->getByUsername($username);
     }
 }

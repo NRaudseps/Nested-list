@@ -20,9 +20,9 @@ final class UsersTable extends AbstractMigration
     {
         $table = $this->table('users');
         $table->addIndex(['id'])
-            ->addColumn('username', 'string')
-            ->addColumn('email', 'string')
-            ->addColumn('passwerd', 'string')
+            ->addColumn('username', 'string', )
+            ->addColumn('email', 'string', ['unique' => true])
+            ->addColumn('password', 'string')
             ->addTimestamps()
             ->create();
     }
