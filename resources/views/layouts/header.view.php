@@ -10,10 +10,23 @@
 </head>
 <body class="font-mono">
 
+<?php if(empty($_SESSION)): ?>
     <div class="flex justify-between items-center bg-blue-300 w-full h-20 px-5">
-        <h3 class="text-3xl">Nested Link</h3>
+        <a href="/" class="text-3xl">Nested Link</a>
         <div class="flex justify-around w-60">
             <a href="/login">Login</a>
             <a href="/register">Register</a>
         </div>
     </div>
+<?php else: ?>
+    <div class="flex justify-between items-center bg-blue-300 w-full h-20 px-5">
+        <a href="/" class="text-3xl">Nested Link</a>
+        <div class="flex justify-around w-60">
+            <a href="/dashboard">Dashboard</a>
+            <form action="/logout" method="post">
+                <button>Logout</button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
+

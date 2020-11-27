@@ -27,7 +27,11 @@ class RegisterController
 
             (new SaveUserService)->execute($user);
 
-            header("Location: /");
+            session_start();
+
+            $_SESSION['username'] = $user->username();
+
+            header("Location: /dashboard");
         } else {
             header("Location: /register?error=Passwords+do+not+match");
         }

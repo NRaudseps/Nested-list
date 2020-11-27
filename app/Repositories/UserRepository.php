@@ -39,13 +39,15 @@ class UserRepository
 
     public function getByEmail($email)
     {
-        return (new Database())
+        $query =  (new Database())
             ->query()
             ->select('*')
             ->from('users')
             ->where('email = :email')
             ->setParameter('email', $email)
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative()[0];
+
+        return new User($query['username'], $query['email'], $query['password']);
     }
 }
