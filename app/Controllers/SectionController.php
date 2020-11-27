@@ -8,7 +8,7 @@ use App\Bootstrap\Database;
 
 class SectionController
 {
-    public function index()
+    public function show()
     {
         session_start();
 
@@ -31,7 +31,7 @@ class SectionController
     {
         session_start();
 
-        return require_once './resources/views/createSection.view.php';
+        return require_once './resources/views/create_section.view.php';
     }
 
     public function store()
@@ -61,6 +61,37 @@ class SectionController
 
 
         header("Location: {$url}");
+    }
+
+    public function edit()
+    {
+        session_start();
+
+        return require_once './resources/views/edit_section.view.php';
+    }
+
+    public function update()
+    {
+        session_start();
+
+        $url = '/section/' . $_POST['redirect_id'];
+        if($_POST['redirect_id'] === ''){
+            $_POST['redirect_id'] = null;
+            $url = '/dashboard';
+        }
+
+        (new Database())
+            ->query()
+            ->update('sections')
+            ->set('name', '?')
+            ->set('description', '?')
+            ->where('id', '?')
+            ->setParameter(0, $_POST['name'])
+            ->setParameter(1, $_POST['description'])
+            ->setParameter(2, $_POST['id'])
+            ->execute();
+
+        header("Location: /dashboard");
     }
 
     public function destroy()
