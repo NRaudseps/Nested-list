@@ -10,54 +10,49 @@
 </head>
 <body>
 
-    <div class="font-mono h-screen flex justify-center items-center flex-col bg-gray-200">
-        <div class="h-2/5 w-1/5 border border-gray-300 rounded-lg shadow shadow-lg bg-white">
-            <h3 class="text-3xl flex justify-center py-4">Register</h3>
+<div class="font-mono h-screen flex justify-center items-center flex-col bg-gray-200">
+    <div class="h-2/5 w-1/5 border border-gray-300 rounded-lg shadow shadow-lg bg-white">
+        <h3 class="text-3xl flex justify-center py-4">Register</h3>
 
-            <form action="/register" method="post" class="px-4">
-                <label for="username">Enter Your Username</label>
-                <input
+        <form action="/register" method="post" class="px-4">
+            <label for="username">Enter Your Username</label>
+            <input
                     type="text"
                     name="username"
                     placeholder="Username"
                     required
                     class="mb-2 border border-gray-300 rounded w-full"
-                ><br>
-                <label for="email">Enter Your Email Address</label>
-                <input
+            ><br>
+            <label for="email">Enter Your Email Address</label>
+            <input
                     type="email"
                     name="email"
                     placeholder="email"
                     required
                     class="mb-2 border border-gray-300 rounded w-full"
-                ><br>
-                <label for="password">Enter Your Password</label>
-                <input
+            ><br>
+            <label for="password">Enter Your Password</label>
+            <input
                     type="password"
                     name="password"
                     placeholder="password"
                     required
                     class="mb-2 border border-gray-300 rounded w-full"
-                ><br>
-                <label for="password_confirmation">Password Confirmation</label>
-                <input
+            ><br>
+            <label for="password_confirmation">Password Confirmation</label>
+            <input
                     type="password"
                     name="password_confirmation"
                     placeholder="password"
                     required
                     class="mb-2 border border-gray-300 rounded w-full"
-                ><br>
-                <div class="flex items-center justify-between mt-4">
-                    <?php require 'resources/views/components/blue-button.view.php'?>
-                    <a href="/" class="mr-2">Back</a>
-                </div>
-            </form>
-        </div>
-        <?php if (isset($_GET['error'])): ?>
-            <p class="mt-2 text-red-400">
-                <?php echo htmlspecialchars($_GET['error']); ?>
-            </p>
-        <?php endif; ?>
+            ><br>
+            <div class="flex items-center justify-between mt-4">
+                <?php require 'resources/views/components/blue-button.view.php' ?>
+                <a href="/" class="mr-2">Back</a>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 </html>

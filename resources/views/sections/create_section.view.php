@@ -11,7 +11,7 @@ require_once './resources/views/layouts/header.view.php';
         <label for="description">Enter The Description</label><br>
         <input type="text" name="description" required class="mb-4 border border-gray-300"><br>
 
-        <?php require './resources/views/components/blue-button.view.php';?>
+        <?php require './resources/views/components/blue-button.view.php'; ?>
     </form>
 </div>
 

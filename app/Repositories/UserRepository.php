@@ -3,7 +3,6 @@
 
 namespace App\Repositories;
 
-
 use App\Bootstrap\Database;
 use App\Models\User;
 
@@ -42,7 +41,7 @@ class UserRepository
 
     public function getByEmail($email)
     {
-        $query =  (new Database())
+        $query = (new Database())
             ->query()
             ->select('*')
             ->from('users')

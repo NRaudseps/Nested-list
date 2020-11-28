@@ -1,11 +1,9 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\User;
 
 
-use App\Bootstrap\Database;
-use App\Models\User;
 use App\Repositories\UserRepository;
 
 class SaveUserService

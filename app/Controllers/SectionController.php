@@ -4,7 +4,11 @@
 namespace App\Controllers;
 
 
-use App\Bootstrap\Database;
+use App\Services\Section\DeleteSectionService;
+use App\Services\Section\GetSectionsService;
+use App\Services\Section\GetSectionUrlService;
+use App\Services\Section\StoreSectionService;
+use App\Services\Section\UpdateSectionService;
 
 class SectionController
 {
@@ -12,15 +16,7 @@ class SectionController
     {
         session_start();
 
-        $sections = (new Database())
-            ->query()
-            ->select('*')
-            ->from('sections')
-            ->where('parent_id = :id AND user_id = :user_id')
-            ->setParameter('id', $id)
-            ->setParameter('user_id', $_SESSION['id'])
-            ->execute()
-            ->fetchAllAssociative();
+        $sections = (new GetSectionsService())->execute($id, $_SESSION['id']);
 
         return require_once './resources/views/sections/section.view.php';
     }
@@ -34,27 +30,17 @@ class SectionController
     {
         session_start();
 
-        $url = '/section/' . $_POST['parent_id'];
-        if($_POST['parent_id'] === ''){
+        $url = GetSectionUrlService::execute($_POST['parent_id']);
+
+        if ($_POST['parent_id'] === '') {
             $_POST['parent_id'] = null;
-            $url = '/dashboard';
         }
 
-        (new Database())
-            ->query()
-            ->insert('sections')
-            ->values([
-                'user_id' => '?',
-                'parent_id' => '?',
-                'name' => '?',
-                'description' => '?'
-            ])
-            ->setParameter(0, $_SESSION['id'])
-            ->setParameter(1, $_POST['parent_id'])
-            ->setParameter(2, $_POST['name'])
-            ->setParameter(3, $_POST['description'])
-            ->execute();
-
+        (new StoreSectionService())
+            ->execute($_SESSION['id'],
+                $_POST['parent_id'],
+                $_POST['name'],
+                $_POST['description']);
 
         header("Location: {$url}");
     }
@@ -68,22 +54,12 @@ class SectionController
     {
         session_start();
 
-        $url = '/section/' . $_POST['parent_id'];
-        if($_POST['parent_id'] === ''){
+        $url = GetSectionUrlService::execute($_POST['parent_id']);
+        if ($_POST['parent_id'] === '') {
             $_POST['parent_id'] = null;
-            $url = '/dashboard';
         }
 
-        (new Database())
-            ->query()
-            ->update('sections')
-            ->set('name', '?')
-            ->set('description', '?')
-            ->where('id', '?')
-            ->setParameter(0, $_POST['name'])
-            ->setParameter(1, $_POST['description'])
-            ->setParameter(2, $id)
-            ->execute();
+        (new UpdateSectionService())->execute($_POST['name'], $_POST['description'], $id);
 
         header("Location: {$url}");
     }
@@ -92,18 +68,12 @@ class SectionController
     {
         session_start();
 
-        $url = '/section/' . $_POST['parent_id'];
-        if($_POST['parent_id'] === ''){
+        $url = GetSectionUrlService::execute($_POST['parent_id']);
+        if ($_POST['parent_id'] === '') {
             $_POST['parent_id'] = null;
-            $url = '/dashboard';
         }
 
-        (new Database())
-            ->query()
-            ->delete('sections')
-            ->where('id = :id')
-            ->setParameter('id', $id)
-            ->execute();
+        (new DeleteSectionService())->execute($id);
 
         header("Location: {$url}");
     }

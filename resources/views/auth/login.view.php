@@ -17,22 +17,22 @@
         <form action="#" method="post" class="h-full px-4">
             <label for="email">Enter Your Email Address</label>
             <input
-                type="email"
-                name="email"
-                placeholder="email"
-                required
-                class="mb-2 border border-gray-300 rounded w-full"
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    required
+                    class="mb-2 border border-gray-300 rounded w-full"
             ><br>
             <label for="password">Enter Your Password</label>
             <input
-                type="password"
-                name="password"
-                placeholder="password"
-                required
-                class="mb-2 border border-gray-300 rounded w-full"
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    required
+                    class="mb-2 border border-gray-300 rounded w-full"
             ><br>
             <div class="flex items-center justify-between mt-4">
-                <?php require 'resources/views/components/blue-button.view.php'?>
+                <?php require 'resources/views/components/blue-button.view.php' ?>
                 <a href="/" class="mr-2">Back</a>
             </div>
         </form>

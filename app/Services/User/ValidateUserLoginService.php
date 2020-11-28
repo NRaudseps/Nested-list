@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\User;
 
 
 use App\Repositories\UserRepository;
 
-class ValidateUserRegistrationService
+class ValidateUserLoginService
 {
     protected UserRepository $user;
 
@@ -17,11 +17,12 @@ class ValidateUserRegistrationService
 
     public function execute($post)
     {
-        $query = $this->user->getByUsername($post['username']);
+        $query = $this->user->getByEmail($post['email']);
 
-        if($post['password'] === $post['password_confirmation'] && empty($query)){
+        if (!empty($query)) {
             return true;
         }
+
         return false;
     }
 }

@@ -3,8 +3,7 @@
 
 namespace App\Controllers;
 
-
-use App\Bootstrap\Database;
+use App\Services\Section\GetDashboardService;
 
 class DashboardController
 {
@@ -12,16 +11,7 @@ class DashboardController
     {
         session_start();
 
-        $sections = (new Database())
-            ->query()
-            ->select('*')
-            ->from('sections')
-            ->where('parent_id is NULL AND user_id = :user_id')
-            ->setParameter('user_id', $_SESSION['id'])
-            ->execute()
-            ->fetchAllAssociative();
-
-//        die(var_dump($sections));
+        $sections = (new GetDashboardService())->execute($_SESSION['id']);
 
         return require_once './resources/views/dashboard.view.php';
     }
