@@ -18,11 +18,8 @@
             <td class="border-2 border-gray-300 px-3">
                 <a href="/section/<?php echo $section['id']?>"><?php echo $section['description']; ?></a>
             </td>
-            <?php require_once 'buttons.view.php'; ?>
+            <?php require 'buttons.view.php'; ?>
         </tr>
-
-    
-
     <?php endforeach; ?>
     </tbody>
 
@@ -32,7 +29,9 @@
 <?php endif; ?>
 
 <form action="/section/create" method="get">
-    <input type="hidden" name="id" value="<?php echo explode('/', $_SERVER['REQUEST_URI'])[2];?>">
-    <button class="mt-4 bg-blue-300 py-2 px-2 border border-gray-400 rounded-lg text-2xl">Create New Section</button>
+    <input type="hidden" name="parent_id" value="<?php echo $id?>">
+    <button class="mt-4 bg-blue-300 hover:bg-blue-500 py-2 px-2 border border-gray-400 rounded-lg text-2xl">
+        Create New Section
+    </button>
 </form>
 

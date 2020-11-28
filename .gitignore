@@ -3,4 +3,4 @@
 /vendor
 .phpunit.result.cache
 .env
-/public
+/public/app.css

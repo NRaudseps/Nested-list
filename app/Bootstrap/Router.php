@@ -31,6 +31,7 @@ class Router
                 // ... 405 Method Not Allowed
                 break;
             case FastRoute\Dispatcher::FOUND:
+
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
                 list($class, $method) = explode("@", $handler, 2);

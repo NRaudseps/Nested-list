@@ -32,12 +32,7 @@
                 class="mb-2 border border-gray-300 rounded w-full"
             ><br>
             <div class="flex items-center justify-between mt-4">
-                <button
-                    type="submit"
-                    class="bg-blue-300 rounded border border-gray-300 py-2 px-4"
-                >
-                    Submit
-                </button>
+                <?php require 'resources/views/components/blue-button.view.php'?>
                 <a href="/" class="mr-2">Back</a>
             </div>
         </form>

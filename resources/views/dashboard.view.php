@@ -1,22 +1,19 @@
 <?php
-require_once 'layouts/header.view.php';
-session_start();
+require_once './resources/views/layouts/header.view.php';
 ?>
 
-<?php if(isset($_SESSION['username'])): ?>
-
+<?php if(can()): ?>
 <div class="h-screen p-8">
     <h1 class="text-4xl">
-        Hello, <?php echo ucwords($_SESSION['username']); ?>
+        Hello, <?php echo ucwords($username); ?>
     </h1>
 
     <?php require_once 'components/table.view.php'; ?>
 
 </div>
-
 <?php endif; ?>
 
 
 <?php
-require_once 'layouts/footer.view.php';
+require_once './resources/views/layouts/footer.view.php';
 ?>
