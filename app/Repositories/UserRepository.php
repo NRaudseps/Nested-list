@@ -50,6 +50,7 @@ class UserRepository
             ->execute()
             ->fetchAllAssociative()[0];
 
-        return new User($query['id'], $query['username'], $query['email'], $query['password']);
+        return empty($query) ? [] :
+            new User($query['id'], $query['username'], $query['email'], $query['password']);
     }
 }
